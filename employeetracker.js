@@ -10,8 +10,8 @@ var connection = mysql.createConnection({
   user: "root",
 
   // Your password
-  password: "",
-  database: "employee_tracker"
+  password: "barnes78",
+  database: "employeetracker"
 });
 
 connection.connect(function(err) {
@@ -27,3 +27,5 @@ function afterConnection() {
     connection.end();
   });
 }
+
+
