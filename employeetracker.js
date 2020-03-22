@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
   user: "root",
 
   // Your password
-  password: "barnes78",
+  password: "********",
   database: "employeetracker"
 });
 
@@ -20,12 +20,21 @@ connection.connect(function(err) {
   afterConnection();
 });
 
-function afterConnection() {
+/*function afterConnection() {
   connection.query("SELECT * FROM products", function(err, res) {
     if (err) throw err;
     console.log(res);
     connection.end();
-  });
+  }); 
+} */
+
+function postAuction() {
+    inquirer
+    .prompt ([
+        {
+            name: ""
+        }
+    ])
 }
 
 
