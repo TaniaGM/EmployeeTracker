@@ -1,0 +1,24 @@
+{
+  "name": "EmployeeTracker",
+  "version": "1.0.0",
+  "description": "Building an employee tracker",
+  "main": "EmployeeTracker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TaniaGM/EmployeeTracker.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TaniaGM/EmployeeTracker/issues"
+  },
+  "homepage": "https://github.com/TaniaGM/EmployeeTracker#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^7.0.1",
+    "mysql": "^2.17.1"
+  }
+}
