@@ -1,6 +1,5 @@
 const orm = require("./config/orm.js");
-const inquirer = require("inquirer");
-
+const inquirer = require("inquirer")
 // View employees, view departments, view roles, add employee, add department, add role, update role, update manager, 
 // view employees by manager, delete employee, delete role, delete department, quit
 
