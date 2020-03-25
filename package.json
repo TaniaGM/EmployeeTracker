@@ -1,5 +1,5 @@
 {
-  "name": "EmployeeTracker",
+  "name": "index.js",
   "version": "1.0.0",
   "description": "Building an employee tracker",
   "main": "EmployeeTracker.js",
