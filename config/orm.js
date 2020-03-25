@@ -1,10 +1,10 @@
 const connection = require("./connection.js");
 
 const orm = {
-    addDepartment: function(deptName) {
-        return new Promise(function(resolve, reject) {
+    addDepartment: function (deptName) {
+        return new Promise(function (resolve, reject) {
             const queryString = `INSERT INTO departments (name) VALUES (?)`;
-            connection.query(queryString, deptName, function(err, result) {
+            connection.query(queryString, deptName, function (err, result) {
                 if (err) {
                     return reject(err);
                 }
@@ -12,12 +12,12 @@ const orm = {
                 return resolve();
             });
         });
-        
+
     },
-    addRole: function(roleTitle, roleSalary, deptId) {
-        return new Promise(function(resolve, reject) {
+    addRole: function (roleTitle, roleSalary, deptId) {
+        return new Promise(function (resolve, reject) {
             const queryString = "INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)";
-            connection.query(queryString, [roleTitle, roleSalary, deptId],function (err, result) {
+            connection.query(queryString, [roleTitle, roleSalary, deptId], function (err, result) {
                 if (err) {
                     return reject(err);
                 }
@@ -25,12 +25,12 @@ const orm = {
                 return resolve();
             });
         });
-        
+
     },
-    addEmployee: function(firstName, lastName, roleId, mgrId) {
-        return new Promise(function(resolve, reject) {
+    addEmployee: function (firstName, lastName, roleId, mgrId) {
+        return new Promise(function (resolve, reject) {
             const queryString = "INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)";
-            connection.query(queryString, [firstName, lastName, roleId, mgrId], function(err, result) {
+            connection.query(queryString, [firstName, lastName, roleId, mgrId], function (err, result) {
                 if (err) {
                     return reject(err);
                 }
@@ -38,20 +38,20 @@ const orm = {
                 return resolve();
             });
         });
-        
+
     },
-    viewEmployees: function() {
-        return new Promise(function(resolve, reject) {
+    viewEmployees: function () {
+        return new Promise(function (resolve, reject) {
             const queryString = 'SELECT employees.id, first_name, last_name, title, salary, name, manager_id FROM employees LEFT JOIN roles ON employees.role_id = roles.id LEFT JOIN departments ON roles.department_id = departments.id';
-            connection.query(queryString, function(err, result) {
+            connection.query(queryString, function (err, result) {
                 if (err) {
                     return reject(err);
                 }
                 let newTable = [];
-                for (let i=0; i< result.length; i++) {
+                for (let i = 0; i < result.length; i++) {
                     let manager_name = "";
                     if (result[i].manager_id !== null) {
-                        for (let j=0; j<result.length; j++) {
+                        for (let j = 0; j < result.length; j++) {
                             if (result[j].id === result[i].manager_id) {
                                 manager_name = result[j].first_name + " " + result[j].last_name;
                             }
@@ -74,17 +74,17 @@ const orm = {
                 return resolve();
             });
         });
-        
+
     },
-    getEmployees: function() {
-        return new Promise(function(resolve, reject) {
+    getEmployees: function () {
+        return new Promise(function (resolve, reject) {
             const queryString = "SELECT * FROM employees";
-            connection.query(queryString, function(err, result) {
+            connection.query(queryString, function (err, result) {
                 if (err) {
                     return reject(err);
                 }
                 const empArray = [];
-                for (let i=0; i<result.length; i++) {
+                for (let i = 0; i < result.length; i++) {
                     const empObj = {
                         id: result[i].id,
                         name: result[i].first_name + " " + result[i].last_name
@@ -95,15 +95,15 @@ const orm = {
             });
         });
     },
-    viewRoles: function() {
-        return new Promise(function(resolve, reject) {
+    viewRoles: function () {
+        return new Promise(function (resolve, reject) {
             const queryString = "SELECT roles.id, title, salary, name FROM roles LEFT JOIN departments ON roles.department_id = departments.id";
-            connection.query(queryString, function(err, result) {
+            connection.query(queryString, function (err, result) {
                 if (err) {
                     return reject(err);
                 }
                 const newTable = [];
-                for (let i=0; i<result.length; i++) {
+                for (let i = 0; i < result.length; i++) {
                     const roleObj = {
                         "ID": result[i].id,
                         "Title": result[i].title,
@@ -116,12 +116,12 @@ const orm = {
                 return resolve();
             });
         });
-        
+
     },
-    getRoles: function() {
-        return new Promise(function(resolve, reject) {
+    getRoles: function () {
+        return new Promise(function (resolve, reject) {
             const queryString = "SELECT * FROM roles";
-            connection.query(queryString, function(err, result) {
+            connection.query(queryString, function (err, result) {
                 if (err) {
                     return reject(err);
                 }
@@ -129,10 +129,10 @@ const orm = {
             });
         });
     },
-    viewDepartments: function() {
-        return new Promise(function(resolve, reject) {
+    viewDepartments: function () {
+        return new Promise(function (resolve, reject) {
             const queryString = "SELECT * FROM departments";
-            connection.query(queryString, function(err, result) {
+            connection.query(queryString, function (err, result) {
                 if (err) {
                     return reject(err);
                 }
@@ -140,12 +140,12 @@ const orm = {
                 return resolve();
             });
         });
-        
+
     },
-    getDepartments: function() {
-        return new Promise(function(resolve, reject) {
+    getDepartments: function () {
+        return new Promise(function (resolve, reject) {
             const queryString = "SELECT * FROM departments";
-            connection.query(queryString, function(err, result) {
+            connection.query(queryString, function (err, result) {
                 if (err) {
                     return reject(err);
                 }
@@ -153,10 +153,10 @@ const orm = {
             });
         });
     },
-    updateRole: function(empId, newRole) {
-        return new Promise(function(resolve, reject) {
+    updateRole: function (empId, newRole) {
+        return new Promise(function (resolve, reject) {
             const queryString = "SELECT id FROM roles WHERE title = ?";
-            connection.query(queryString, newRole, function(err, result) {
+            connection.query(queryString, newRole, function (err, result) {
                 if (err) {
                     return reject(err);
                 }
@@ -169,7 +169,7 @@ const orm = {
                     {
                         id: empId
                     }],
-                    function(err, result) {
+                    function (err, result) {
                         if (err) {
                             return reject(err);
                         }
@@ -178,10 +178,10 @@ const orm = {
                     });
             });
         });
-        
+
     },
-    updateManager: function(empId, newMgrId) {
-        return new Promise(function(resolve, reject) {
+    updateManager: function (empId, newMgrId) {
+        return new Promise(function (resolve, reject) {
             const queryString = "UPDATE employees SET ? WHERE ?";
             connection.query(queryString,
                 [{
@@ -190,7 +190,7 @@ const orm = {
                 {
                     id: empId
                 }],
-                function(err, result) {
+                function (err, result) {
                     if (err) {
                         return reject(err);
                     }
@@ -198,17 +198,17 @@ const orm = {
                     return resolve();
                 });
         });
-        
+
     },
-    viewEmpsByMgr: function(mgrId) {
-        return new Promise(function(resolve, reject) {
+    viewEmpsByMgr: function (mgrId) {
+        return new Promise(function (resolve, reject) {
             const queryString = 'SELECT employees.id, first_name, last_name, title, salary, name, manager_id FROM employees LEFT JOIN roles ON employees.role_id = roles.id LEFT JOIN departments ON roles.department_id = departments.id WHERE manager_id = ?';
-            connection.query(queryString, mgrId, function(err, result) {
+            connection.query(queryString, mgrId, function (err, result) {
                 if (err) {
                     return reject(err);
                 }
                 let newTable = [];
-                for (let i=0; i< result.length; i++) {
+                for (let i = 0; i < result.length; i++) {
                     const tableElement = {
                         "Employee ID": result[i].id,
                         "First Name": result[i].first_name,
@@ -223,12 +223,12 @@ const orm = {
                 return resolve();
             });
         });
-        
+
     },
-    deleteRecord: function(tableInput, recordId) {
-        return new Promise(function(resolve, reject) {
+    deleteRecord: function (tableInput, recordId) {
+        return new Promise(function (resolve, reject) {
             const queryString = "DELETE FROM ?? WHERE id = ?";
-            connection.query(queryString, [tableInput, recordId], function(err, result) {
+            connection.query(queryString, [tableInput, recordId], function (err, result) {
                 if (err) {
                     return reject(err);
                 }
@@ -236,26 +236,26 @@ const orm = {
                 return resolve();
             });
         });
-        
+
     },
-    viewUtilizedBudget: function(deptId) {
-        return new Promise(function(resolve, reject) {
+    viewUtilizedBudget: function (deptId) {
+        return new Promise(function (resolve, reject) {
             const queryString = "SELECT * FROM roles WHERE department_id = ?";
-            connection.query(queryString, deptId, function(err, roleResult) {
+            connection.query(queryString, deptId, function (err, roleResult) {
                 if (err) {
                     return reject(err);
                 }
                 let utilizedBudget = 0;
-                for (let i=0; i<roleResult.length; i++) {
+                for (let i = 0; i < roleResult.length; i++) {
                     const roleId = roleResult[i].id;
                     const salary = roleResult[i].salary;
                     const queryString = "SELECT * FROM employees WHERE role_id = ?";
-                    connection.query(queryString, roleId, function(err, empResult) {
+                    connection.query(queryString, roleId, function (err, empResult) {
                         if (err) {
                             return reject(err);
                         }
                         utilizedBudget += empResult.length * salary;
-                        if (i === roleResult.length-1) {
+                        if (i === roleResult.length - 1) {
                             console.log("Total department utilized budget: " + utilizedBudget);
                             return resolve();
                         }
@@ -263,9 +263,9 @@ const orm = {
                 }
             });
         });
-        
+
     },
-    endConnection: function() {
+    endConnection: function () {
         connection.end();
     }
 };
